@@ -30,6 +30,6 @@ export default Users;
             flexGrow: 0,
             padding:10,
             backgroundColor:'lightblue',
-            height:400
+            height:410
         }
     });
