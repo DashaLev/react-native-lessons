@@ -1,23 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Users from "./components/Users";
+import {NavigationContainer} from "@react-navigation/native";
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import HomePage from "./screens/HomePage";
+import UsersPage from "./screens/UsersPage";
+import {Provider, useSelector} from "react-redux";
+import {store} from "./redux/store";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto"/>
-      <Users/>
-    </View>
-  );
+    return (
+        <Provider store={store}>
+            <AppWrapper/>
+        </Provider>
+    )
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'aliceblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+export const AppWrapper = () => {
 
-});
+    let {status} = useSelector(state => state)
+
+    return (
+        <NavigationContainer>
+            <Drawer.Navigator>
+                <Drawer.Screen name={'Users Page'} component={UsersPage} options={{headerShown: status}}/>
+                <Drawer.Screen name={'Home Page'} component={HomePage}/>
+            </Drawer.Navigator>
+        </NavigationContainer>
+    )
+}

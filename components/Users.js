@@ -4,8 +4,7 @@ import {View} from 'react-native';
 import {getUsers} from "../services/user.service";
 import User from "./User";
 
-
-const Users = () => {
+const Users = ({navigation}) => {
 
     let [users, setUsers] = useState([]);
 
@@ -17,7 +16,7 @@ const Users = () => {
         <View style={styles.base}>
             <FlatList
                 data={users}
-                renderItem={({item}) => <User item={item}/>}
+                renderItem={({item}) => <User item={item} navigation={navigation} />}
                 keyExtractor={item => `${item.id}`}
             />
         </View>
@@ -30,6 +29,6 @@ export default Users;
             flexGrow: 0,
             padding:10,
             backgroundColor:'lightblue',
-            height:400
         }
     });
+
